@@ -16,17 +16,38 @@
 		      type="text/css"
 		      media="print"/>
 		<!-- Javascript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+		<script src="/GET/js-jquery?type=text/javascript"
+		        type="text/javascript"></script>
+		<script src="/GET/js-jquery-tmpl?type=text/javascript"
 		        type="text/javascript"></script>
 		<script src="/GET/js-wikdis?type=text/javascript"
 		        type="text/javascript"></script>
 		<script type="text/javascript">
 			<!--//--><![CDATA[//><!--
 				$(function(){
-					wik = new wikdis();
-					wik.show($('body')[0]);
+					wik = {};
+					wik.backend = new wikdis_backend();
+					wik.frontend = new wikdis_view(wik.backend,
+					                               {default: 'startseite'});
+					wik.frontend.show($('body'));
 				});
 			//--><!]]>
+		</script>
+		<!-- HTML Templates -->
+		<script id="mainTemplate" type="text/x-jquery-tmpl">
+			<ul id="pagelist">
+				<li>startseite</li>
+			</ul>
+			<div id="page">
+			</div>
+		</script>
+		<script id="listPageTemplate" type="text/x-jquery-tmpl">
+				<li>${name}</li>
+		</script>
+		<script id="pageTemplate" type="text/x-jquery-tmpl">
+			<h2></h2>
+			<p class="save">save</p>
+			<textarea class="content"></textarea>
 		</script>
 	</head>
 	<body>
